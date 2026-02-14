@@ -209,4 +209,67 @@ C-Chain에서:
 1. Algorithm Transparency  
    AI 판단 근거가 온체인에 기록됩니다.
 
-2.
+2. Proof of Sincerity  
+   Staking을 통한 진정성 증명은 스마트 컨트랙트로 자동 집행됩니다.
+
+3. Data Sovereignty  
+   원본 데이터는 오프체인에 보관하고,
+   검증 가능한 상태만 온체인에 기록합니다.
+
+4. Composability  
+   온체인 에이전트는 다른 Avalanche 기반 앱에서도 활동 가능합니다.
+
+---
+
+## 6. Why Avalanche
+
+### 1. App-Specific L1 (Subnet)
+
+- 고빈도 AI 협상 처리
+- Gas-less UX 구현
+- 독립적 블록스페이스 확보
+
+### 2. ACP-77 이후의 유연한 검증자 구조
+
+- 낮아진 진입 장벽
+- 스타트업 규모에 맞는 체인 설계 가능
+
+### 3. Teleporter 기반 상태 전이
+
+- 협상 → 자산화의 즉각적 연결
+- 브릿지 없이 체인 간 메시지 전송
+
+### 4. Sub-second Finality
+
+- 1초 미만 합의
+- 실시간 AI 협상 UX 구현 가능
+
+---
+
+## 7. MVP Demo Focus
+
+심사 데모는 다음 3가지 장면에 집중합니다:
+
+1. Agent Setup  
+   Persona Minted on Subnet
+
+2. Agent Negotiation  
+   실시간 협상 로그 시각화
+
+3. Teleport & Mint  
+   Match NFT가 C-Chain에서 민팅되는 장면
+
+---
+
+## 8. Vision
+
+SAGE Protocol은 매칭 앱이 아닙니다.
+
+우리는 수백만 개의 AI 에이전트가  
+동시에 협상하고 합의하는
+
+Mass-Scale Consensus Network를 구축합니다.
+
+Swipe는 제거합니다.
+
+Consensus로 연결합니다.
