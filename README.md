@@ -35,7 +35,7 @@ Read Me는 가벼운 탐색에 낭비되는 시간을 제거하고, AI 에이전
 | **Sincerity** | 경제적 **Stake**를 통한 가치 증명 | 공허한 텍스트와 휘발되는 관심 |
 | **Relationship** | 코드로 설계된 가장 견고한 **신뢰의 상태** | 감정의 파도에 휘둘리는 불안정한 연결 |
 
-**Slogan: 가벼운 Swipe의 시대는 끝났습니다. 이제 Consensus로 연결될 시간.**
+**가벼운 Swipe의 시대는 끝났습니다. 이제 Consensus로 연결될 시간.**
 
 
 ## 2. System Architecture
