@@ -1,270 +1,299 @@
-# Read Me  
+# Read Me
+
 ### Verifiable Agent-to-Agent Social Protocol on Avalanche
 
 ---
 
 ## 1. Project Definition
 
-Read Me는 단순한 소개팅 앱이 아닙니다.
+**Read Me**는 단순한 소개팅 앱이 아닙니다.
 
-이 프로젝트는 다음을 구현합니다:
-
-AI가 인간을 대신해 협상하고  
-그 합의 과정을 온체인에 기록하는  
-Verifiable Agent-to-Agent Social Protocol
+이 프로젝트는 AI 에이전트가 인간을 대신해 협상하고,  
+그 합의 결과를 **검증 가능한 형태로 온체인에 정산(Settlement)** 하는  
+**Verifiable Agent-to-Agent Social Protocol**입니다.
 
 데이트는 첫 번째 유스케이스일 뿐입니다.
 
 이 프로토콜은 다음 영역으로 확장 가능합니다:
 
-- Recruiting
-- Co-founder Matching
-- Business Partner Discovery
-- High-trust Social Coordination
+- Recruiting  
+- Co-founder Matching  
+- Business Partner Discovery  
+- High-trust Social Coordination  
 
 핵심은 다음입니다:
 
-AI가 나를 대신해 상대방을 검증하고  
-그 검증 기록이 온체인에 남는다.
+- AI가 나를 대신해 협상합니다.
+- 합의 결과는 서명(Signature)과 증명(Proof)으로 온체인에 남습니다.
+- 신뢰는 코드로 집행됩니다.
 
-Swipe가 아니라 Consensus입니다.
+Swipe가 아니라 **Consensus**입니다.
 
 ---
 
 ## 2. System Architecture
 
-### Layer 1 — User & Private Layer
+Read Me는 다음 구조를 채택합니다:
 
-역할:
-- 사용자 민감 데이터 처리
-- 개인 AI 학습
-- Persona State 생성
+> 추론은 오프체인  
+> 증명과 집행은 온체인
 
-기술:
-- Vector DB (Pinecone / Milvus)
-- LLM (Local or API)
-- Client-side encryption
+---
 
-동작:
+### Layer 1 — User & Private Layer (Off-Chain Intelligence)
 
-사용자는 자신의 AI 에이전트와 대화합니다.
+**역할**
 
-AI는 대화를 분석하여 Persona State(성향 요약본)를 생성합니다.
+- 사용자 민감 데이터 처리  
+- AI 추론 수행  
+- Persona State 생성  
 
-온체인에는 원본 데이터가 아닌,
-요약 상태의 해시(Hash) 또는 암호화된 상태만 기록됩니다.
+**기술**
 
-목적:
-- 데이터 무결성 증명
-- 프라이버시 보호
+- Vector DB (Pinecone / Milvus)  
+- LLM (Local or API)  
+- Client-side encryption  
+- EIP-712 Typed Signature  
+
+**동작 흐름**
+
+1. 사용자는 AI 에이전트와 대화합니다.
+2. AI는 Persona State를 생성합니다.
+3. 다음과 같은 Commit을 생성합니다:
+
+```text
+persona_commit_hash = hash(
+  persona_state ||
+  model_id ||
+  prompt_version ||
+  timestamp ||
+  salt
+)
+```
+
+4. 사용자 지갑(또는 위임된 Agent Key)이 해당 Commit에 서명합니다.
+5. Subnet에 Commit만 기록합니다.
+
+**설계 원칙**
+
+- 원본 데이터는 온체인에 기록되지 않습니다.
+- 온체인은 데이터의 존재 및 무결성만 증명합니다.
+- 추론은 완전히 오프체인에서 수행됩니다.
 
 ---
 
 ### Layer 2 — Negotiation Subnet (Custom Avalanche L1)
 
-역할:
-- AI Agent 간 고빈도 협상 처리
-- 협상 로그 기록
-- Gas-less 환경 구성
+**역할**
 
-기술:
-- Avalanche Subnet (Custom EVM)
-- Custom Gas Policy (0 Gas or Custom Gas Token)
+- Agent 간 합의 앵커링
+- 서명 검증
+- Dispute 처리
+- Stake 조건 정의
 
-왜 Subnet인가:
+**중요 원칙**
 
-AI 협상은 한 번의 매칭에도 수십~수백 개의 트랜잭션을 발생시킵니다.
+협상 대화는 온체인에서 직접 수행되지 않습니다.
 
-이를 C-Chain에서 처리하면 가스비가 비효율적입니다.
-
-Read Me는 전용 L1을 구축하여:
-
-- 고빈도 트랜잭션 처리
-- 비용 최소화
-- App-specific Blockspace 확보
+에이전트 간 협상은 오프체인에서 수행되며,  
+Subnet은 합의 결과의 증명만 처리합니다.
 
 ---
 
-### Layer 3 — Settlement Layer (Avalanche C-Chain)
+### Negotiation Flow
 
-역할:
-- 최종 매칭 결과 자산화
-- NFT 발행
-- Staking / Escrow 실행
+1. Agent A와 Agent B가 오프체인에서 협상 수행
+2. 협상 로그는 Merkle Tree 구조로 구성
+3. 최종 합의 시 생성되는 데이터:
 
-기술:
-- Avalanche C-Chain
-- Teleporter (AWM 기반 메시징)
-- ERC-721 / ERC-1155
+- `transcript_root`
+- `agreement_terms_hash`
+- `compatibility_score`
+- `agentA_signature`
+- `agentB_signature`
 
----
+4. Subnet Smart Contract는 다음을 검증:
 
-## 3. Detailed Data Flow
+- 서명 유효성
+- match_id 유일성
+- Stake 조건 충족 여부
 
-### Step 1 — Persona Commit
-
-1. 사용자가 AI와 대화
-2. AI가 Persona State 생성
-3. Persona Hash를 Subnet에 기록
-
-프라이버시를 유지하면서도 상태 무결성을 증명합니다.
+Subnet에는 전체 대화가 아닌  
+**요약된 Root와 서명만 기록됩니다.**
 
 ---
 
-### Step 2 — On-Chain Agent Negotiation
+### Gas Policy
 
-1. Agent A와 Agent B가 스마트 컨트랙트 내에서 협상 시작
-2. 가치관 정렬도 계산
-3. 리스크 분석
-4. Compatibility Score 산출
+Gas-less UX는 다음 구조로 구현됩니다:
 
-모든 협상 로그는 Subnet에 기록됩니다.
+- Relayer 기반 수수료 대납
+- Rate limiting 적용
+- Match 생성 시 Stake 요구
 
-이는 사후 검증이 가능한 구조입니다.
-
----
-
-### Step 3 — Teleporter State Transition
-
-AI들이 합의에 도달하면:
-
-Negotiation Subnet  
-→ Teleporter  
-→ C-Chain
-
-협상 결과가 메인 체인으로 전달됩니다.
-
-Teleporter는 단순 자산 이동이 아니라  
-협상 데이터에서 자산화된 관계로의 상태 전이를 담당합니다.
+0 Gas는 무제한 무료를 의미하지 않습니다.  
+스팸 방지를 위한 경제적 장치가 존재합니다.
 
 ---
 
-### Step 4 — Relationship NFT Minting
+## 3. Teleporter State Transition
 
-C-Chain에서:
+합의 완료 후 흐름:
 
-- Relationship NFT 발행
-- 조건부 메타데이터 포함
-- Staking 조건 명시
+Negotiation L1  
+→ Teleporter (ICM)  
+→ Avalanche C-Chain  
 
-예:
+Subnet에서 생성된 증명 데이터가  
+C-Chain Settlement Contract로 전달됩니다.
 
-- 3일간 대화 유지 시 보증금 반환
-- 조건 미달성 시 Slashing
+**Compact Payload 구성**
 
-관계의 진정성을 코드로 집행합니다.
+- `match_id`
+- `participants`
+- `agreement_terms_hash`
+- `transcript_root`
+- `stake_amount`
+- `expiration_time`
+
+C-Chain에서는 다음이 실행됩니다:
+
+- Relationship NFT 민팅
+- Escrow 시작
+- Slashing 조건 활성화
 
 ---
 
-## 4. Crypto-Native Economic Model (Trust-Fi)
+## 4. Relationship NFT & Trust Enforcement
 
-### 1. Proof of Sincerity — Staking
+Relationship NFT는 단순한 정적 NFT가 아닙니다.
 
-매칭 요청 시 AVAX를 예치합니다.
+포함되는 요소:
 
-스마트 컨트랙트 규칙:
+- Stake amount
+- Active duration
+- Check-in requirement
+- Slashing rule
 
-성공:
-- 일정 기간 대화 유지 → 보증금 반환 + 토큰 보상
+---
 
-실패:
-- Ghosting / 비매너 → Slashing
+### Proof of Conversation
 
-가벼운 참여는 비용을 지불하게 됩니다.
-진지한 참여는 보상을 받습니다.
+“대화 유지”는 다음으로 정의됩니다:
+
+- 하루 1회 On-Chain Check-in 트랜잭션
+- N일 연속 체크인 시 조건 충족
+
+이 구조는 다음을 보장합니다:
+
+- 완전 자동 Slashing 가능
+- 외부 오라클 의존 최소화
+- 분쟁 없는 조건 집행
+
+Ghosting은 감정이 아니라  
+**Timeout + 미체크인**으로 정의됩니다.
+
+---
+
+## 5. Economic Model — Trust-Fi
+
+### 1. Proof of Sincerity
+
+매칭 요청 시 Stake 예치
+
+**성공**
+- 조건 충족 → Stake 반환 + Reward
+
+**실패**
+- Timeout → Slashing
+
+진지함은 경제적 비용으로 증명됩니다.
 
 ---
 
 ### 2. Agent Upgrade Economy (NFT 기반)
 
-에이전트 기능 확장은 NFT 장착 형태로 구현됩니다.
+Agent 기능 확장은 NFT 권한 모델로 구현됩니다.
 
-예:
+예시:
 
-- Multi-Thread Core NFT → 동시 협상 5명
-- Deep Scan Lens NFT → 분석 정확도 상승
+- Multi-Thread NFT  
+  → 동시 활성 협상 슬롯 증가
 
-유저는 기능을 소비하는 것이 아니라  
-에이전트를 자산화합니다.
+- Priority Access NFT  
+  → 추가 매칭 시도 가능
 
----
-
-### 3. Lounge Signal Economy
-
-- Megaphone NFT → 라운지 상단 노출
-- Direct Intervene Ticket → AI 협상 중 인간 개입
-
-수익 모델:
-- NFT 판매
-- 2차 거래 수수료
-- Slashing 수익
-- Staking Yield
+정확도 상승과 같은 추상 개념은  
+온체인 검증이 불가능하므로  
+“권한 및 정책 확장”으로 정의됩니다.
 
 ---
 
-## 5. Why On-Chain
+### 3. Revenue Sources
 
-1. Algorithm Transparency  
-   AI 판단 근거가 온체인에 기록됩니다.
+- NFT Primary Sales  
+- Secondary Royalty  
+- Slashing Pool  
+- Premium Matching Features  
 
-2. Proof of Sincerity  
-   Staking은 스마트 컨트랙트로 자동 집행됩니다.
+---
 
-3. Data Sovereignty  
-   원본 데이터는 오프체인에 보관하고,
-   검증 가능한 상태만 온체인에 기록합니다.
+## 6. Why On-Chain
+
+1. Signature-based Consensus  
+   합의는 양측 서명으로 증명됩니다.
+
+2. Deterministic Enforcement  
+   Stake 및 Slashing은 자동 집행됩니다.
+
+3. Data Anchoring  
+   Transcript Root를 통한 사후 검증 가능성 확보
 
 4. Composability  
-   온체인 에이전트는 다른 Avalanche 기반 앱에서도 활동 가능합니다.
+   Relationship NFT는 다른 Avalanche 기반 앱과 연동 가능합니다.
 
 ---
 
-## 6. Why Avalanche
+## 7. Why Avalanche
 
-### 1. App-Specific L1 (Subnet)
+### 1. Custom L1 (Subnet)
 
-- 고빈도 AI 협상 처리
-- Gas-less UX 구현
-- 독립적 블록스페이스 확보
+- App-specific blockspace 확보
+- 협상 앵커링 전용 체인 구성
+- 독립적 정책 설정 가능
 
-### 2. ACP-77 기반 유연한 체인 운영
+### 2. Interchain Messaging (Teleporter)
 
-- 낮아진 검증자 진입 장벽
-- 스타트업 친화적 구조
+- 브릿지 없이 상태 전이
+- 협상 → 자산화 즉시 연결
 
-### 3. Teleporter 기반 상태 전이
+### 3. Sub-second Finality
 
-- 협상 → 자산화의 즉각적 연결
-- 브릿지 없이 체인 간 메시지 전송
-
-### 4. Sub-second Finality
-
-- 1초 미만 확정성
-- 실시간 AI 협상 UX 구현 가능
+- 실시간 UX 구현 가능
 
 ---
 
-## 7. MVP Demo Focus
+## 8. MVP Scope
 
-데모는 다음 3장면에 집중합니다:
+MVP는 다음 3가지에 집중합니다:
 
-1. Agent Setup  
-   Persona Minted on Subnet
+1. Persona Commit on L1  
+2. Agent Agreement Anchoring  
+3. Teleport & Relationship NFT Mint  
 
-2. Agent Negotiation  
-   실시간 협상 로그 시각화
-
-3. Teleport & Mint  
-   Relationship NFT가 C-Chain에서 민팅되는 장면
+협상은 오프체인  
+증명과 집행은 온체인
 
 ---
 
-## 8. Vision
+## 9. Vision
 
 Read Me는 앱이 아닙니다.
 
-우리는 수백만 개의 AI 에이전트가  
-동시에 협상하고 신뢰를 구축하는
+수백만 개의 AI 에이전트가  
+동시에 협상하고  
+합의를 생성하며  
+신뢰를 코드로 집행하는  
 
 Mass-Scale Consensus Network를 구축합니다.
 
