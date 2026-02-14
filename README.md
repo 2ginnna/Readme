@@ -181,138 +181,83 @@ C-Chain에서는 다음이 실행됩니다:
 
 ---
 
-## 4. Relationship NFT & Trust Enforcement
+---
 
-Relationship NFT는 단순한 정적 NFT가 아닙니다.
+## 4. Relationship NFT & Trust-Flow
 
-포함되는 요소:
+Relationship NFT는 단순한 소유형 자산이 아닙니다. 관계의 진정성을 데이터로 기록하고 강제하는 **'Dynamic Commitment Asset'**입니다.
 
-- Stake amount
-- Active duration
-- Check-in requirement
-- Slashing rule
+### **📦 NFT Embedded Data**
+* **Financial Layer:** Stake Amount (예치금 규모)
+* **Time Layer:** Active Duration (관계 유지 기간), Check-in Requirement (체크인 빈도)
+* **Rule Layer:** Slashing Rules (슬래싱 조건), Proof of Conversation (대화 무결성 증명)
+
+### **🔄 Definitive Engagement: "Proof-of-Conversation"**
+추상적인 '대화'를 기술적으로 정의하여 분쟁의 여지를 원천 차단합니다.
+* **Mechanism:** 하루 1회 수행되는 온체인 **Check-in** 트랜잭션.
+* **Success:** N일 연속 체크인 달성 시 예치금 반환 및 보상 지급.
+* **Ghosting Re-defined:** 더 이상 감정의 영역이 아닙니다. **[Timeout + 미체크인]**이라는 명확한 코드로 정의되어 즉각적인 슬래싱을 집행합니다.
 
 ---
 
-### Proof of Conversation
+## 5. Economic Model: Trust-Fi
 
-“대화 유지”는 다음으로 정의됩니다:
+### **💰 1. Proof of Sincerity (Stake-to-Match)**
+모든 매칭 요청에는 진지함을 증명하는 **경제적 기회비용**이 수반됩니다.
+* **Success:** 조건 충족 시, 예치금(Stake) 반환 및 프로토콜 보상(Reward).
+* **Failure:** 일방적 소통 단절 또는 조건 미달성 시, 예치금은 즉시 **Slashing** 처리됩니다.
 
-- 하루 1회 On-Chain Check-in 트랜잭션
-- N일 연속 체크인 시 조건 충족
+### **🛠️ 2. Agent Upgrade Economy**
+에이전트의 확장은 추상적 지표가 아닌 **'권한 및 정책의 확장'**으로 구현됩니다.
+* **Multi-Thread NFT:** 동시 활성 협상 슬롯 확장.
+* **Priority Access NFT:** 매칭 시도 횟수 및 알고리즘 우선순위권 부여.
+* **Constraint Expansion:** 정확도와 같은 모호한 개념 대신 "데이터 접근 권한 및 정책 확장"으로 정의하여 온체인 검증 가능성을 유지합니다.
 
-이 구조는 다음을 보장합니다:
-
-- 완전 자동 Slashing 가능
-- 외부 오라클 의존 최소화
-- 분쟁 없는 조건 집행
-
-Ghosting은 감정이 아니라  
-**Timeout + 미체크인**으로 정의됩니다.
-
----
-
-## 5. Economic Model — Trust-Fi
-
-### 1. Proof of Sincerity
-
-매칭 요청 시 Stake 예치
-
-**성공**
-- 조건 충족 → Stake 반환 + Reward
-
-**실패**
-- Timeout → Slashing
-
-진지함은 경제적 비용으로 증명됩니다.
+### **📈 3. Revenue Sources**
+* **Primary Sales:** 기능 확장형 NFT 및 유틸리티 아이템 판매.
+* **Secondary Royalty:** NFT 거래 발생 시 발생하는 수수료.
+* **Slashing Pool:** 규칙 위반 시 발생하는 슬래싱 자산의 에코시스템 환원.
 
 ---
 
-### 2. Agent Upgrade Economy (NFT 기반)
+## 6. Why On-Chain?
 
-Agent 기능 확장은 NFT 권한 모델로 구현됩니다.
-
-예시:
-
-- Multi-Thread NFT  
-  → 동시 활성 협상 슬롯 증가
-
-- Priority Access NFT  
-  → 추가 매칭 시도 가능
-
-정확도 상승과 같은 추상 개념은  
-온체인 검증이 불가능하므로  
-“권한 및 정책 확장”으로 정의됩니다.
+* **Signature-based Consensus:** 모든 합의는 양측 에이전트의 디지털 서명으로만 증명됩니다.
+* **Deterministic Enforcement:** 인간의 개입 없이 스마트 컨트랙트가 Stake 및 Slashing을 자동 집행합니다.
+* **Data Anchoring:** Transcript Root를 통해 대화의 무결성을 사후 검증할 수 있는 투명성을 확보합니다.
+* **Composability:** Relationship NFT는 다른 Avalanche 기반 앱과 연동되어 신뢰 지표로 활용될 수 있습니다.
 
 ---
 
-### 3. Revenue Sources
+## 7. Why Avalanche?
 
-- NFT Primary Sales  
-- Secondary Royalty  
-- Slashing Pool  
-- Premium Matching Features  
+### **🚀 1. Custom L1 (Subnet)**
+협상 앵커링과 로그 기록을 위한 전용 블록스페이스를 확보하여, 메인넷의 부하와 무관한 독립적 가스 정책을 운영합니다.
 
----
+### **📡 2. Interchain Messaging (Teleporter)**
+브릿지 없이 **[Subnet: 협상] ↔ [C-Chain: 자산화]**를 즉각 연결하여, 협상 결과가 즉시 자산으로 전이되는 심리스한 UX를 제공합니다.
 
-## 6. Why On-Chain
-
-1. Signature-based Consensus  
-   합의는 양측 서명으로 증명됩니다.
-
-2. Deterministic Enforcement  
-   Stake 및 Slashing은 자동 집행됩니다.
-
-3. Data Anchoring  
-   Transcript Root를 통한 사후 검증 가능성 확보
-
-4. Composability  
-   Relationship NFT는 다른 Avalanche 기반 앱과 연동 가능합니다.
-
----
-
-## 7. Why Avalanche
-
-### 1. Custom L1 (Subnet)
-
-- App-specific blockspace 확보
-- 협상 앵커링 전용 체인 구성
-- 독립적 정책 설정 가능
-
-### 2. Interchain Messaging (Teleporter)
-
-- 브릿지 없이 상태 전이
-- 협상 → 자산화 즉시 연결
-
-### 3. Sub-second Finality
-
-- 실시간 UX 구현 가능
+### **⏱️ 3. Sub-second Finality**
+1초 미만의 확정성을 통해 AI 에이전트 간의 실시간 합의와 NFT 민팅을 지연 없이 처리합니다.
 
 ---
 
 ## 8. MVP Scope
+> **"Negotiation is Off-chain, Proof and Enforcement are On-chain."**
 
-MVP는 다음 3가지에 집중합니다:
-
-1. Persona Commit on L1  
-2. Agent Agreement Anchoring  
-3. Teleport & Relationship NFT Mint  
-
-협상은 오프체인  
-증명과 집행은 온체인
+MVP는 프로토콜의 핵심 신뢰 레이어를 증명하는 다음 3가지 장면에 집중합니다:
+1. **Persona Commit on L1:** 페르소나의 무결성을 Subnet에 박제.
+2. **Agent Agreement Anchoring:** 에이전트 간 협상 로그 요약 및 온체인 서명.
+3. **Teleport & NFT Manifestation:** Teleporter를 통한 상태 전이 및 C-Chain NFT 발행.
 
 ---
 
 ## 9. Vision
 
-Read Me는 앱이 아닙니다.
+**Read Me는 단순한 서비스가 아닙니다.**
 
-수백만 개의 AI 에이전트가  
-동시에 협상하고  
-합의를 생성하며  
-신뢰를 코드로 집행하는  
+우리는 수백만 개의 AI 에이전트가 동시에 협상하고, 스스로 신뢰를 생성하며, 그 합의를 코드로 집행하는 **'Mass-Scale Consensus Infrastructure'**를 구축합니다.
 
-Mass-Scale Consensus Network를 구축합니다.
+**Swipe를 제거합니다. Consensus로 연결합니다.**
 
-Swipe를 제거합니다.  
-Consensus로 연결합니다.
+---
