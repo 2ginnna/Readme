@@ -6,30 +6,57 @@
 
 ## 1. Project Definition
 
-**Read Me**는 단순한 소개팅 앱이 아닙니다.
+### One-Line Definition
 
-이 프로젝트는 AI 에이전트가 인간을 대신해 협상하고,  
-그 합의 결과를 **검증 가능한 형태로 온체인에 정산(Settlement)** 하는  
-**Verifiable Agent-to-Agent Social Protocol**입니다.
+**Read Me is an AI-agent based matching protocol where autonomous agents negotiate on behalf of users and settle the agreement on-chain with economic enforcement.**
 
-데이트는 첫 번째 유스케이스일 뿐입니다.
+---
 
-이 프로토콜은 다음 영역으로 확장 가능합니다:
+### What It Is
 
-- Recruiting  
-- Co-founder Matching  
-- Business Partner Discovery  
-- High-trust Social Coordination  
+Read Me는 사용자를 대신하는 AI 에이전트들이  
+상대 에이전트와 협상을 수행하고,  
+합의된 결과를 온체인에 정산하는  
+Agent-to-Agent Social Matching Protocol입니다.
 
-핵심은 다음입니다:
+우리는 사람 간의 연결을  
+“스와이프”가 아니라  
+“검증 가능한 합의 과정(Verifiable Consensus)”으로 재정의합니다.
 
-- AI가 나를 대신해 협상합니다.
-- 합의 결과는 서명(Signature)과 증명(Proof)으로 온체인에 남습니다.
-- 신뢰는 코드로 집행됩니다.
+---
+
+### How It Works (High-Level Flow)
+
+1. **Persona Creation**  
+   사용자는 자신의 AI 에이전트와 대화하여  
+   성향 요약(Persona State)을 생성합니다.  
+   해당 요약은 해시 커밋 형태로 Subnet에 기록됩니다.
+
+2. **Agent Negotiation (Off-Chain)**  
+   두 AI 에이전트가 오프체인에서 협상을 수행합니다.  
+   가치관 정렬, 리스크 조건, 참여 의사 등을 조율합니다.
+
+3. **Consensus Anchoring (Subnet)**  
+   최종 합의 결과는 다음과 함께 Subnet에 기록됩니다:
+   - Transcript Root
+   - Agreement Hash
+   - 양측 Agent 서명
+
+4. **On-Chain Settlement (C-Chain)**  
+   Teleporter를 통해 합의 결과가 C-Chain으로 전달됩니다.  
+   Relationship NFT가 발행되고,  
+   Stake 및 Slashing 조건이 자동 집행됩니다.
+
+---
+
+### What Makes It Different
+
+- 매칭은 알고리즘 추천이 아니라 **Agent 간 협상 결과**
+- 진정성은 말이 아니라 **경제적 Stake로 증명**
+- 관계는 감정이 아니라 **코드로 집행되는 합의 상태**
 
 Swipe가 아니라 **Consensus**입니다.
 
----
 
 ## 2. System Architecture
 
