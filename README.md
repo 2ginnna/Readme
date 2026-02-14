@@ -37,7 +37,7 @@ Read Me는 가벼운 탐색에 낭비되는 시간을 제거하고, AI 에이전
 
 ---
 
-## 2. What Makes It Different
+### What Makes It Different
 
 | 구분 | Read Me (Consensus) | Legacy Apps (Swipe) |
 | :--- | :--- | :--- |
