@@ -27,16 +27,6 @@ Read Me는 가벼운 탐색에 낭비되는 시간을 제거하고, AI 에이전
 
 ---
 
-### ✨ Why It Matters
-
-* **Proof of Sincerity:** 공허한 말 대신, 경제적 스테이킹으로 진심의 무게를 증명합니다.
-* **Algorithmic Transparency:** AI의 판단 근거는 온체인 로그로 투명하게 추적 가능합니다.
-* **Data Sovereignty:** 민감한 대화는 오프체인에 머물고, 검증된 결과값만이 온체인에서 자산화됩니다.
-
-> **"Don't just Swipe. Re-read the Soul."** > 가벼운 연결은 비용이 되고, 진지한 몰입은 보상이 되는 새로운 소셜 프로토콜.
-
----
-
 ### What Makes It Different
 
 | 구분 | Read Me (Consensus) | Legacy Apps (Swipe) |
