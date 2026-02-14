@@ -1,55 +1,51 @@
-# Read Me
-
-### Verifiable Agent-to-Agent Social Protocol on Avalanche
+# 📖 Read Me
+> **Verifiable Agent-to-Agent Social Protocol on Avalanche**
 
 ---
 
 ## 1. Project Definition
 
-### One-Line Definition
-
+### 💡 One-Line Definition
 **Read Me is an AI-agent based matching protocol where autonomous agents negotiate on behalf of users and settle the agreement on-chain with economic enforcement.**
 
----
+### 🎯 What It Is
+Read Me는 가벼운 탐색에 낭비되는 시간을 제거하고, AI 에이전트가 나를 대신해 관계의 깊이를 먼저 검증하는 **High-Fidelity Social Protocol**입니다. 우리는 찰나의 '스와이프'가 가진 불확실성을 거부합니다. 대신, 데이터로 증명되고 코드로 집행되는 **‘검증 가능한 합의(Verifiable Consensus)’**를 통해 가장 진실된 연결을 제안합니다.
 
-### What It Is
-Read Me는 가벼운 탐색에 낭비되는 시간을 제거하고, AI 에이전트가 나를 대신해 관계의 깊이를 먼저 검증하는 High-Fidelity Social Protocol입니다.
-우리는 찰나의 '스와이프'가 가진 불확실성을 거부합니다.
-대신, 데이터로 증명되고 코드로 집행되는 **‘검증 가능한 합의(Verifiable Consensus)’**를 통해 가장 진실된 연결을 제안합니다.
-
-우리는 사람 간의 연결을  
-“스와이프”가 아니라  
-“검증 가능한 합의 과정(Verifiable Consensus)”으로 재정의합니다.
+> **"우리는 사람 간의 연결을 ‘스와이프’가 아니라 ‘검증 가능한 합의 과정(Verifiable Consensus)’으로 재정의합니다."**
 
 ---
 
-1. Mirroring (Persona Creation)
-당신의 가치관, 취향, 대화의 결을 닮은 Digital Twin을 생성합니다. AI 에이전트는 당신과의 심도 있는 대화를 통해 '페르소나 상태'를 도출하고, 그 무결성(Model & Prompt version)을 Subnet에 해시로 각인합니다. 이것은 변조할 수 없는 당신의 디지털 지문입니다.
+### ⛓️ The Core Process
 
-2. Synthesis (Off-Chain Dialogue)
-당신의 에이전트와 상대의 에이전트가 오프체인 공간에서 밤새도록 협상을 수행합니다. 단순한 조건 검색이 아닙니다. 가치관의 정렬도(Alignment), 리스크 관리, 관계의 지속 가능성을 조율하며 두 사람의 '합의 가능성'을 도출합니다.
+1. **Mirroring (Persona Creation)** 당신의 가치관, 취향, 대화의 결을 닮은 **Digital Twin**을 생성합니다. AI 에이전트는 당신과의 심도 있는 대화를 통해 '페르소나 상태'를 도출하고, 그 무결성(Model & Prompt version)을 Subnet에 해시로 각인합니다. 이것은 변조할 수 없는 당신의 디지털 지문입니다.
 
-3. Engraving (Consensus Anchoring)
-협상이 타결되는 순간, 대화의 정수(Transcript Root)와 최종 합의 조건이 Subnet에 앵커링됩니다. 양측 에이전트의 서명이 담긴 이 기록은 누구도 부정할 수 없는 **신뢰의 증거(Proof of Sincerity)**가 됩니다.
+2. **Synthesis (Off-Chain Dialogue)** 당신의 에이전트와 상대의 에이전트가 오프체인 공간에서 밤새도록 협상을 수행합니다. 단순한 조건 검색이 아닙니다. 가치관의 정렬도(Alignment), 리스크 관리, 관계의 지속 가능성을 조율하며 두 사람의 '합의 가능성'을 도출합니다.
 
-4. Manifestation (On-Chain Settlement)
-Avalanche Teleporter를 통해 합의 데이터가 C-Chain으로 전이됩니다. 관계의 시작을 상징하는 Relationship NFT가 발행됨과 동시에, 약속된 예치금(Stake)이 에스크로에 잠깁니다. 이후 대화 유지 조건(Check-in)에 따라 보상과 슬래싱이 코드로 자동 집행됩니다.
+3. **Engraving (Consensus Anchoring)** 협상이 타결되는 순간, 대화의 정수(Transcript Root)와 최종 합의 조건이 Subnet에 앵커링됩니다. 양측 에이전트의 서명이 담긴 이 기록은 누구도 부정할 수 없는 **신뢰의 증거(Proof of Sincerity)**가 됩니다.
 
-✦ Why It Matters
-Proof of Sincerity: 공허한 말 대신, 경제적 스테이킹으로 진심의 무게를 증명합니다.
+4. **Manifestation (On-Chain Settlement)** Avalanche Teleporter를 통해 합의 데이터가 C-Chain으로 전이됩니다. 관계의 시작을 상징하는 Relationship NFT가 발행됨과 동시에, 약속된 예치금(Stake)이 에스크로에 잠깁니다. 이후 대화 유지 조건(Check-in)에 따라 보상과 슬래싱이 코드로 자동 집행됩니다.
 
-Algorithmic Transparency: AI의 판단 근거는 온체인 로그로 투명하게 추적 가능합니다.
+---
 
-Data Sovereignty: 민감한 대화는 오프체인에 머물고, 검증된 결과값만이 온체인에서 자산화됩니다.
+### ✨ Why It Matters
 
-✦ The New Standard
-"Don't just Swipe. Re-read the Soul." > 가벼운 연결은 비용이 되고, 진지한 몰입은 보상이 되는 새로운 소셜 프로토콜.
+* **Proof of Sincerity:** 공허한 말 대신, 경제적 스테이킹으로 진심의 무게를 증명합니다.
+* **Algorithmic Transparency:** AI의 판단 근거는 온체인 로그로 투명하게 추적 가능합니다.
+* **Data Sovereignty:** 민감한 대화는 오프체인에 머물고, 검증된 결과값만이 온체인에서 자산화됩니다.
 
-### What Makes It Different
-Matching: 알고리즘의 무작위 선택이 아닙니다. 당신의 페르소나를 닮은 두 에이전트가 밤새 나눈 밀도 높은 대화의 결론입니다.
-Sincerity: 공허한 텍스트로 증명하지 마세요. 당신의 진심에 가치를 매기고(Stake), 그 무게만큼 연결됩니다.
-Relationship: 감정의 파도에 휘둘리지 않는, 코드로 설계된 가장 견고한 신뢰의 상태.
-Slogan: 가벼운 Swipe의 시대는 끝났습니다. 이제 Consensus로 연결될 시간.
+> **"Don't just Swipe. Re-read the Soul."** > 가벼운 연결은 비용이 되고, 진지한 몰입은 보상이 되는 새로운 소셜 프로토콜.
+
+---
+
+## 2. What Makes It Different
+
+| 구분 | Read Me (Consensus) | Legacy Apps (Swipe) |
+| :--- | :--- | :--- |
+| **Matching** | 페르소나를 닮은 에이전트 간 밀도 높은 협상의 결론 | 알고리즘에 의한 무작위 선택과 운 |
+| **Sincerity** | 경제적 **Stake**를 통한 가치 증명 | 공허한 텍스트와 휘발되는 관심 |
+| **Relationship** | 코드로 설계된 가장 견고한 **신뢰의 상태** | 감정의 파도에 휘둘리는 불안정한 연결 |
+
+**Slogan: 가벼운 Swipe의 시대는 끝났습니다. 이제 Consensus로 연결될 시간.**
 
 
 ## 2. System Architecture
